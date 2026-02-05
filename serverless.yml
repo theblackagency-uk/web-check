@@ -1,5 +1,15 @@
 service: web-check-api
 
+# Note: The screenshot function requires Chromium to be available in AWS Lambda.
+# You can either:
+# 1. Use a Lambda Layer with Chromium (recommended)
+#    See: https://github.com/shelfio/chrome-aws-lambda-layer
+# 2. Deploy with chrome-aws-lambda package (included in dependencies)
+# 
+# To use a Lambda Layer, add this to the screenshot function:
+#   layers:
+#     - arn:aws:lambda:us-east-1:764866452798:layer:chrome-aws-lambda:31
+
 frameworkVersion: '3'
 
 provider:
@@ -12,6 +22,11 @@ provider:
   environment:
     NODE_ENV: production
     PLATFORM: aws
+    API_TIMEOUT_LIMIT: 30000
+    GOOGLE_CLOUD_API_KEY: ${env:GOOGLE_CLOUD_API_KEY, ''}
+    BUILT_WITH_API_KEY: ${env:BUILT_WITH_API_KEY, ''}
+    REACT_APP_SHODAN_API_KEY: ${env:REACT_APP_SHODAN_API_KEY, ''}
+    REACT_APP_WHO_API_KEY: ${env:REACT_APP_WHO_API_KEY, ''}
   httpApi:
     cors: true
 

@@ -1,0 +1,262 @@
+service: web-check-api
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: ${opt:stage, 'prod'}
+  region: us-east-1
+  memorySize: 1024
+  timeout: 30
+  environment:
+    NODE_ENV: production
+    PLATFORM: aws
+  httpApi:
+    cors: true
+
+package:
+  individually: true
+  excludeDevDependencies: true
+  patterns:
+    - '!.git/**'
+    - '!.github/**'
+    - '!src/**'
+    - '!public/**'
+    - '!dist/**'
+    - '!node_modules/**'
+    - '!*.md'
+
+functions:
+  archives:
+    handler: api/archives.handler
+    events:
+      - httpApi:
+          path: /api/archives
+          method: get
+
+  block-lists:
+    handler: api/block-lists.handler
+    events:
+      - httpApi:
+          path: /api/block-lists
+          method: get
+
+  carbon:
+    handler: api/carbon.handler
+    events:
+      - httpApi:
+          path: /api/carbon
+          method: get
+
+  cookies:
+    handler: api/cookies.handler
+    events:
+      - httpApi:
+          path: /api/cookies
+          method: get
+
+  dns:
+    handler: api/dns.handler
+    events:
+      - httpApi:
+          path: /api/dns
+          method: get
+
+  dns-server:
+    handler: api/dns-server.handler
+    events:
+      - httpApi:
+          path: /api/dns-server
+          method: get
+
+  dnssec:
+    handler: api/dnssec.handler
+    events:
+      - httpApi:
+          path: /api/dnssec
+          method: get
+
+  features:
+    handler: api/features.handler
+    events:
+      - httpApi:
+          path: /api/features
+          method: get
+
+  firewall:
+    handler: api/firewall.handler
+    events:
+      - httpApi:
+          path: /api/firewall
+          method: get
+
+  get-ip:
+    handler: api/get-ip.handler
+    events:
+      - httpApi:
+          path: /api/get-ip
+          method: get
+
+  headers:
+    handler: api/headers.handler
+    events:
+      - httpApi:
+          path: /api/headers
+          method: get
+
+  hsts:
+    handler: api/hsts.handler
+    events:
+      - httpApi:
+          path: /api/hsts
+          method: get
+
+  http-security:
+    handler: api/http-security.handler
+    events:
+      - httpApi:
+          path: /api/http-security
+          method: get
+
+  legacy-rank:
+    handler: api/legacy-rank.handler
+    events:
+      - httpApi:
+          path: /api/legacy-rank
+          method: get
+
+  linked-pages:
+    handler: api/linked-pages.handler
+    events:
+      - httpApi:
+          path: /api/linked-pages
+          method: get
+
+  mail-config:
+    handler: api/mail-config.handler
+    events:
+      - httpApi:
+          path: /api/mail-config
+          method: get
+
+  ports:
+    handler: api/ports.handler
+    events:
+      - httpApi:
+          path: /api/ports
+          method: get
+
+  quality:
+    handler: api/quality.handler
+    events:
+      - httpApi:
+          path: /api/quality
+          method: get
+
+  rank:
+    handler: api/rank.handler
+    events:
+      - httpApi:
+          path: /api/rank
+          method: get
+
+  redirects:
+    handler: api/redirects.handler
+    events:
+      - httpApi:
+          path: /api/redirects
+          method: get
+
+  robots-txt:
+    handler: api/robots-txt.handler
+    events:
+      - httpApi:
+          path: /api/robots-txt
+          method: get
+
+  screenshot:
+    handler: api/screenshot.handler
+    timeout: 60
+    memorySize: 2048
+    events:
+      - httpApi:
+          path: /api/screenshot
+          method: get
+
+  security-txt:
+    handler: api/security-txt.handler
+    events:
+      - httpApi:
+          path: /api/security-txt
+          method: get
+
+  sitemap:
+    handler: api/sitemap.handler
+    events:
+      - httpApi:
+          path: /api/sitemap
+          method: get
+
+  social-tags:
+    handler: api/social-tags.handler
+    events:
+      - httpApi:
+          path: /api/social-tags
+          method: get
+
+  ssl:
+    handler: api/ssl.handler
+    events:
+      - httpApi:
+          path: /api/ssl
+          method: get
+
+  status:
+    handler: api/status.handler
+    events:
+      - httpApi:
+          path: /api/status
+          method: get
+
+  tech-stack:
+    handler: api/tech-stack.handler
+    events:
+      - httpApi:
+          path: /api/tech-stack
+          method: get
+
+  threats:
+    handler: api/threats.handler
+    events:
+      - httpApi:
+          path: /api/threats
+          method: get
+
+  tls:
+    handler: api/tls.handler
+    events:
+      - httpApi:
+          path: /api/tls
+          method: get
+
+  trace-route:
+    handler: api/trace-route.handler
+    events:
+      - httpApi:
+          path: /api/trace-route
+          method: get
+
+  txt-records:
+    handler: api/txt-records.handler
+    events:
+      - httpApi:
+          path: /api/txt-records
+          method: get
+
+  whois:
+    handler: api/whois.handler
+    events:
+      - httpApi:
+          path: /api/whois
+          method: get
